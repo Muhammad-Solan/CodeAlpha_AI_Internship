@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Language Translator</title>
+      <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+
+    <div class="glass-card">
+
+        <h1>🌍 AI Language Translator</h1>
+        <p class="subtitle">
+            Translate text instantly into multiple languages
+        </p>
+
+        <form method="POST">
+
+            <div class="dropdowns">
+
+                <div>
+                    <label>Source Language</label>
+
+                    <select name="source">
+                        {% for language in languages %}
+                        <option>{{ language }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    <label>Target Language</label>
+
+                    <select name="target">
+                        {% for language in languages %}
+                        <option>{{ language }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+            </div>
+
+            <label>Enter Text</label>
+
+            <textarea
+                name="text"
+                rows="8"
+                placeholder="Type your text here..."
+                required></textarea>
+
+            <button type="submit">
+                🚀 Translate
+            </button>
+
+        </form>
+
+        {% if translated_text %}
+
+        <div class="result">
+
+            <h3>Translation Result</h3>
+
+            <textarea
+                id="resultText"
+                readonly>{{ translated_text }}</textarea>
+
+            <button class="copy-btn"
+            onclick="copyText()">
+                📋 Copy
+            </button>
+
+        </div>
+
+        {% endif %}
+
+        <footer>
+            Developed by Muhammad Solan Sajid
+        </footer>
+
+    </div>
+
+</div>
+
+<script>
+
+function copyText() {
+
+    let copyText =
+    document.getElementById("resultText");
+
+    copyText.select();
+
+    document.execCommand("copy");
+
+    alert("Translation copied!");
+}
+
+</script>
+</body>
+</html>
